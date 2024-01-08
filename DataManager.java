@@ -1,3 +1,4 @@
+import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.Enumeration;
@@ -29,9 +30,6 @@ public class DataManager {
         return indeces;
     }
 
-    /* list = [user1, user2, user3]
-    dic = {1:0, 2:1, 3:2}
-    */
 
     public boolean isAdded(User user){
 
@@ -55,7 +53,9 @@ public class DataManager {
             indeces.put(user.getName(), lastIndex);
             lastIndex += 1;
             this.usersList.add(user);
+            System.out.println("user " +  user.getName() +" added!");
         }
+
     }
 
     public void deleteUser(User user){
@@ -66,10 +66,12 @@ public class DataManager {
             for (int i = index; i < usersList.size(); i++){
                 indeces.put(usersList.get(i).getName(),i);
             }
+            System.out.println("user " +  user.getName() +" deleted!");
         }
         else {
-            System.out.println("user " + user.getName()+ "is not part of our system");
+            System.out.println("user " + user.getName()+ " is not part of our system");
         }
+
     }
 
     public void displayUsers(){
@@ -77,6 +79,9 @@ public class DataManager {
             System.out.println("our System is empty ");
         }
         else {
+            int numberOfUsers = usersList.size();
+            System.out.println("We have "+ numberOfUsers + " users as follows");
+            System.out.println("displaying users");
             for (User user : usersList) {
                 user.displayUser();
             }
@@ -94,15 +99,26 @@ public class DataManager {
             for (int i = 0; i < usersList.size(); i++){
                 indeces.put(usersList.get(i).getName(),i);
             }
+            System.out.println("user "+ user1.getName() + " updated by " + user2.getName());
         }
         else {
             System.out.println(user1.getName()+ "is not part of our system");
         }
-        //this.usersList.set(user1.getId(), user2);
-        //for (int i = 0; i < usersList.size(); i++){
-        //    indeces.put(usersList.get(i).getId(),i);
-        //}
     }
+
+    public void updateUser(User user, String newName){
+        if (isAdded(user)){
+            String oldName = user.getName();
+            user.setName(newName);
+            System.out.println("user's name updated from "+ oldName + " to " + newName);
+        }
+        else {
+            System.out.println(user.getName()+ "is not part of our system");
+        }
+
+    }
+
+
     // TODO: this function updates certain user by another one
     // we need to implement other function where we can update user's name id or other.
     // first we have to decide how will we implement these functioalites.
